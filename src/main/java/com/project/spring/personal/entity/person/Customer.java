@@ -4,20 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "customers")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Customer {
-    @Id
-    private Long id; // trùng với User.id
+@Table(name = "customers")
+public class Customer extends User {
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    private int loyaltyPoints; // điểm tích luỹ
+    private String address;
+    private String phoneNumber;
+    private int loyaltyPoints; // điểm tích lũy
 }

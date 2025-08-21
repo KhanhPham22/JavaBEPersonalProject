@@ -8,9 +8,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "suppliers")
-public class Supplier extends User {
+@Table(name = "admins")
+public class Admin extends User {
 
-    private String companyName;
-    private String taxCode;
+    private String adminCode;  // ví dụ mã quản trị viên
 }

@@ -1,0 +1,10 @@
+package com.project.spring.personal.dto.Auth;
+
+import lombok.Data;
+
+@Data
+public class RegisterRequest {
+    private String email;
+    private String password;
+    private String fullName;
+}

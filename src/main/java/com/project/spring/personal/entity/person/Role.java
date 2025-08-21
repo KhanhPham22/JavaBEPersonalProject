@@ -1,6 +1,6 @@
 package com.project.spring.personal.entity.person;
 
-public enum UserType {
+public enum Role {
     ADMIN,
     CUSTOMER,
     SUPPLIER

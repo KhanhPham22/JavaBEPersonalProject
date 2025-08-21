@@ -1,5 +1,6 @@
 package com.project.spring.personal.entity.product;
 
+import com.project.spring.personal.entity.person.Customer;
 import jakarta.persistence.*;
 import lombok.*;
 
