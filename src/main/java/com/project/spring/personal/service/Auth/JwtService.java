@@ -1,4 +1,4 @@
-package com.project.spring.personal.service;
+package com.project.spring.personal.service.Auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,45 +9,62 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 
+//.setSigningKey(key)
 @Service
 public class JwtService {
 
     private static final String SECRET = "supersecretkeysupersecretkeysupersecretkey"; // 256-bit key
-    private static final long EXPIRATION = 86400000; // 1 ngày
+    private static final long ACCESS_TOKEN_EXPIRATION = 86400000; // 1 day
+    private static final long REFRESH_TOKEN_EXPIRATION = 604800000; // 7 days
 
     private Key key;
 
     @PostConstruct
     public void init() {
-        // Tạo key từ SECRET
         this.key = Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    // Tạo token từ username
     public String generateToken(String username) {
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .expiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // Lấy username từ token
+    public String generateRefreshToken(String username) {
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
     public String extractUsername(String token) {
         return Jwts.parser()
-                .verifyWith(key)          // 0.12.x
+                .setSigningKey(key)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
     }
 
-    // Kiểm tra token hợp lệ
+    public boolean isTokenValid(String token, String username) {
+        try {
+            String extractedUsername = extractUsername(token);
+            Date expiration = extractExpiration(token);
+            return extractedUsername.equals(username) && !expiration.before(new Date());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .verifyWith(key)
+                    .setSigningKey(key)
                     .build()
                     .parseSignedClaims(token);
             return true;
@@ -56,10 +73,9 @@ public class JwtService {
         }
     }
 
-    // Lấy thời gian hết hạn token (Optional)
     public Date extractExpiration(String token) {
         return Jwts.parser()
-                .verifyWith(key)
+                .setSigningKey(key)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()

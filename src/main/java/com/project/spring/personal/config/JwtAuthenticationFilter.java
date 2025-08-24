@@ -1,6 +1,6 @@
 package com.project.spring.personal.config;
 
-import com.project.spring.personal.service.JwtService;
+import com.project.spring.personal.service.Auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
