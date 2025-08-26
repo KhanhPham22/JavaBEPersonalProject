@@ -1,5 +1,6 @@
 package com.project.spring.personal.entity.other;
 
+import com.project.spring.personal.entity.person.Role;
 import com.project.spring.personal.entity.person.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,8 +28,7 @@ public class Token {
 
     private boolean revoked;
 
-    // Token của user nào
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
+    private Role role;
 }

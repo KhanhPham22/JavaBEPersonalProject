@@ -38,15 +38,14 @@ A full-stack ready backend system for an E-commerce platform, built with Spring 
 ## Testing
 - Unit testing with JUnit 5 & Mockito
 - Integration testing with Spring Boot Test
-- Repository testing using H2 or Testcontainers (MySQL)
 - Coverage via JaCoCo
 
 ## Technologies
 - Spring Boot (Web, Data JPA, Security, Validation)
-- MySQL (production), H2 (testing)
+- MySQL (production), 
 - JWT for authentication
 - Maven for build & dependency management
-- JUnit 5, Mockito, Testcontainers for testing
+- JUnit 5, Mockito, for testing
 
 ## Status
 - Backend APIs functional & modularized

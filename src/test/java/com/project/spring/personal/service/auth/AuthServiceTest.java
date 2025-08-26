@@ -10,6 +10,7 @@ import com.project.spring.personal.entity.person.Role;
 import com.project.spring.personal.repository.person.AdminRepository;
 import com.project.spring.personal.repository.person.CustomerRepository;
 import com.project.spring.personal.repository.person.SupplierRepository;
+import com.project.spring.personal.service.Auth.AuthService;
 import com.project.spring.personal.service.Auth.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,7 +75,7 @@ class AuthServiceTest {
                 .email("test@example.com")
                 .password("encodedPassword")
                 .fullName("Test User")
-                .role(Role.CUSTOMER.name())
+                .role(Role.CUSTOMER)  // Use Role enum
                 .build();
 
         admin = Admin.builder()
@@ -82,7 +83,7 @@ class AuthServiceTest {
                 .email("admin@example.com")
                 .password("encodedPassword")
                 .fullName("Admin User")
-                .role(Role.ADMIN.name())
+                .role(Role.ADMIN)  // Use Role enum
                 .build();
 
         supplier = Supplier.builder()
@@ -90,7 +91,7 @@ class AuthServiceTest {
                 .email("supplier@example.com")
                 .password("encodedPassword")
                 .fullName("Supplier User")
-                .role(Role.SUPPLIER.name())
+                .role(Role.SUPPLIER)  // Use Role enum
                 .build();
     }
 
@@ -113,6 +114,7 @@ class AuthServiceTest {
     @Test
     void registerAdminSuccess() {
         registerRequest.setRole("ADMIN");
+        registerRequest.setEmail("admin@example.com");
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(adminRepository.save(any(Admin.class))).thenReturn(admin);
         when(jwtService.generateToken(anyString())).thenReturn("accessToken");
@@ -130,6 +132,7 @@ class AuthServiceTest {
     @Test
     void registerSupplierSuccess() {
         registerRequest.setRole("SUPPLIER");
+        registerRequest.setEmail("supplier@example.com");
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(supplierRepository.save(any(Supplier.class))).thenReturn(supplier);
         when(jwtService.generateToken(anyString())).thenReturn("accessToken");

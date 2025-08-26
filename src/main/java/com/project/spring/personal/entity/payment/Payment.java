@@ -1,5 +1,6 @@
 package com.project.spring.personal.entity.payment;
 
+import com.project.spring.personal.entity.product.Order;
 import jakarta.persistence.*;
 import lombok.*;
 

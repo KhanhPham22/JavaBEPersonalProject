@@ -46,21 +46,21 @@ class UserServiceTest {
                 .id(1L)
                 .email("test@example.com")
                 .fullName("Test User")
-                .role(Role.CUSTOMER.name())
+                .role(Role.CUSTOMER) // Use Role enum
                 .build();
 
         admin = Admin.builder()
                 .id(1L)
                 .email("admin@example.com")
                 .fullName("Admin User")
-                .role(Role.ADMIN.name())
+                .role(Role.ADMIN) // Use Role enum
                 .build();
 
         supplier = Supplier.builder()
                 .id(1L)
                 .email("supplier@example.com")
                 .fullName("Supplier User")
-                .role(Role.SUPPLIER.name())
+                .role(Role.SUPPLIER) // Use Role enum
                 .build();
     }
 
