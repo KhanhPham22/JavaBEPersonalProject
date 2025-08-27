@@ -24,6 +24,8 @@ public class Discount {
 
     private BigDecimal amount; // giảm trực tiếp tiền
 
+    private String description;
+
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
