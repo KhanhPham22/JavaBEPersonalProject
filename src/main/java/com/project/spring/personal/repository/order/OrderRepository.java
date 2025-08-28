@@ -1,6 +1,6 @@
-package com.project.spring.personal.repository.product;
+package com.project.spring.personal.repository.order;
 
-import com.project.spring.personal.entity.product.Order;
+import com.project.spring.personal.entity.order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

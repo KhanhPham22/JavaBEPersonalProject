@@ -1,30 +1,29 @@
-package com.project.spring.personal.entity.product;
+package com.project.spring.personal.entity.order;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "invoices")
+@Table(name = "order_histories")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Invoice {
+public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime issuedAt;
+    private String status; // PENDING -> CONFIRMED -> SHIPPED ...
 
-    private BigDecimal amount;
+    private LocalDateTime changedAt;
 
-    private String paymentStatus; // UNPAID, PAID, REFUNDED
+    private String note;
 
-    // Hoá đơn thuộc về đơn hàng nào
+    // Lịch sử thuộc đơn hàng nào
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;

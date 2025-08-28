@@ -1,31 +1,31 @@
-package com.project.spring.personal.entity.product;
+package com.project.spring.personal.entity.order;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "order_items")
+@Table(name = "invoices")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderItem {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantity;
+    private LocalDateTime issuedAt;
 
-    private BigDecimal price; // giá tại thời điểm đặt
+    private BigDecimal amount;
 
+    private String paymentStatus; // UNPAID, PAID, REFUNDED
+
+    // Hoá đơn thuộc về đơn hàng nào
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private Product product;
 }

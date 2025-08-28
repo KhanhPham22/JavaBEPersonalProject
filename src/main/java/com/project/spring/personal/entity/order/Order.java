@@ -1,4 +1,4 @@
-package com.project.spring.personal.entity.product;
+package com.project.spring.personal.entity.order;
 
 import com.project.spring.personal.entity.person.Customer;
 import jakarta.persistence.*;
